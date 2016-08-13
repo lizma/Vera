@@ -216,6 +216,9 @@ function setVariableIfChanged(serviceId, name, value, deviceId)
     
     if ((value ~= curValue) or (curValue == nil) or (serviceId == "urn:micasaverde-com:serviceId:SceneController1")) then
         luup.variable_set(serviceId, name, value, deviceId)
+        if (serviceId == "urn:upnp-org:serviceId:TemperatureSetpoint1_Cool" or serviceId == "urn:upnp-org:serviceId:TemperatureSetpoint1_Heat") then
+		luup.variable_set("urn:upnp-org:serviceId:TemperatureSetpoint1", name, value, deviceId)
+	end
         return true
         
     else
